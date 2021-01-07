@@ -1,21 +1,25 @@
 # Edit variables below to customize book
-booktitle = Book title
-booksubtitle = Book subtitle
-bookauthors = Author 1, Author 2
+booktitle = Fair Representations of Data
+booksubtitle =
+bookauthors = Oliver Thomas
 titlepagemidnote = Incomplete working draft --- DO NOT SHARE
-titlepagefootnote = Latest public version available at \url{about:blank}
+titlepagefootnote = Latest public version available at \url{oliverthomas.ml}
 bookpdffilename = book.pdf
 
 # Add all sources that need to compile to some html page
 SOURCES := sources/index.md \
-           sources/chapter1.md \
-           sources/chapter2.md \
-           sources/chapter3.md \
+           sources/introduction.md \
+		   sources/fair_representations.md \
+           sources/data_domain_representations.md \
+           sources/identifying_those_at_risk.md \
+           sources/appendix.md \
 
 # Put everything that should compile into an individual chapter.
-CHAPTERS := sources/chapter1.md \
-            sources/chapter2.md \
-            sources/chapter3.md \
+CHAPTERS := sources/introduction.md \
+			sources/fair_representations.md \
+            sources/data_domain_representations.md \
+            sources/identifying_those_at_risk.md \
+            sources/appendix.md \
 
 # Add all style files you're using.
 STYLES := css/tufte.css \

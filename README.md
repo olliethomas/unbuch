@@ -16,12 +16,17 @@ Check out [fairmlbook.org](https://fairmlbook.org) for a real example.
 # Getting started
 
 1. Install [pandoc](https://pandoc.org/) v2.2 or higher and [pandoc-citeproc](https://github.com/jgm/pandoc-citeproc)
+   1. Install the following latex packages 
+      - tufte-latex
+      - hardwrap
+      - catchfile
+    
 2. Make sure you have python 3.5+ installed with [pandocfilters](https://github.com/jgm/pandocfilters) package
 3. Clone the repository
 4. Customize your book by setting up variables in `Makefile`.
-5. Type `make` to build both pdf and html files.
-  - To build html only, type `make html`.
-  - To build pdf only, type `make pdf`.
+5. Type `make -B` to build both pdf and html files.
+  - To build html only, type `make -B html`.
+  - To build pdf only, type `make -B pdf`.
 
 Find the compiled results in `publish/` directory.
 

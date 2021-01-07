@@ -1,6 +1,6 @@
 ---
 chapter-number: 2
-title: Dolor sit amet
+title: Fair Representations in the Data Domain
 link-citations: true
 reference-section-title: References
 ---

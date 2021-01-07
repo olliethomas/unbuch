@@ -1,6 +1,6 @@
 ---
 chapter-number: 1
-title: Lorem ipsum
+title: Fair Representations of Data
 link-citations: true
 reference-section-title: References
 ---
