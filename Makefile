@@ -33,28 +33,28 @@ STYLES := css/tufte.css \
 
 ASSETS := $(wildcard assets/*)
 
-HTMLTARGETS := $(patsubst sources/%.md,publish/%.html,$(SOURCES))
+HTMLTARGETS := $(patsubst sources/%.md,docs/%.html,$(SOURCES))
 
-PDFTARGETS := $(patsubst sources/%.md,publish/pdf/%.pdf,$(CHAPTERS))
+PDFTARGETS := $(patsubst sources/%.md,docs/pdf/%.pdf,$(CHAPTERS))
 
 .PHONY: all
 all: html pdf style
 
 html: $(HTMLTARGETS) assets
 
-pdf: publish/pdf/$(bookpdffilename) $(PDFTARGETS)
+pdf: docs/pdf/$(bookpdffilename) $(PDFTARGETS)
 
 assets: $(ASSETS)
-	cp -R assets publish
+	cp -R assets docs
 
 style: $(STYLES)
-	cat $(STYLES) > publish/style.css;
+	cat $(STYLES) > docs/style.css;
 
 ## Generalized rule: how to build a .html file from each .md
 ## For technical reasons, this uses two pandoc passes:
 ## Step 1: Expands citations into markdown footnotes.
 ## Step 2: Convert preprocessed files to html.
-publish/%.html: sources/%.md templates/tufte.html5 $(STYLES) Makefile references.bib
+docs/%.html: sources/%.md templates/tufte.html5 $(STYLES) Makefile references.bib
 	pandoc \
     --csl=templates/chicago-fullnote-bibliography.csl \
     --bibliography=references.bib \
@@ -76,12 +76,12 @@ publish/%.html: sources/%.md templates/tufte.html5 $(STYLES) Makefile references
     --variable references-section-title="References" \
     --template templates/tufte.html5 \
     --output $@; \
-  cat $(STYLES) > publish/style.css; \
+  cat $(STYLES) > docs/style.css; \
 
 ## Rule to create individual pdf chapters.
 ## Step 1: Expands citations into markdown footnotes.
 ## Step 2: Convert preprocessed files to pdf.
-publish/pdf/%.pdf: sources/%.md 
+docs/pdf/%.pdf: sources/%.md 
 	pandoc \
     --csl=templates/chicago-fullnote-bibliography.csl \
     --bibliography=references.bib \
@@ -99,7 +99,7 @@ publish/pdf/%.pdf: sources/%.md
 ## Rule to create pdf book.
 ## Step 1: Give each markdown file a chapter heading.
 ## Step 2: Compile into pdf using pandoc.
-publish/pdf/$(bookpdffilename): $(SOURCES) templates/book.tex Makefile references.bib
+docs/pdf/$(bookpdffilename): $(SOURCES) templates/book.tex Makefile references.bib
 	$(foreach chapter,$(CHAPTERS),\
       pandoc --template templates/chapter.md $(chapter) \
       --id-prefix=$(notdir $(chapter)) \
@@ -115,7 +115,7 @@ publish/pdf/$(bookpdffilename): $(SOURCES) templates/book.tex Makefile reference
     --variable bookauthors="${bookauthors}" \
     --variable titlepagemidnote="${titlepagemidnote}" \
     --variable titlepagefootnote="${titlepagefootnote}" \
-    --output publish/pdf/$(bookpdffilename) \
+    --output docs/pdf/$(bookpdffilename) \
     $(foreach chapter,$(CHAPTERS),tmp-$(notdir $(chapter))) sources/references.md; \
   $(foreach chapter,$(CHAPTERS),rm tmp-$(notdir $(chapter));) \
 
